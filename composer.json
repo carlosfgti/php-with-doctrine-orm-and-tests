@@ -1,0 +1,16 @@
+{
+    "name": "carlosfgti/php-academy-specializations",
+    "description": "API LoadSpecializations ETI Academy",
+    "autoload": {
+        "psr-4": {
+            "Src\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Carlos Ferreira",
+            "email": "carlos@especializati.com.br"
+        }
+    ],
+    "require": {}
+}
