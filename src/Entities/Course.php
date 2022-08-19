@@ -2,35 +2,35 @@
 
 namespace Src\Entities;
 
-use Doctrine\ORM\Mapping as ORM;
+use DateTime;
+use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping\{
+    Column,
+    Entity,
+    GeneratedValue,
+    Id,
+    Table
+};
 
-/**
- * @ORM\Entity
- * @ORM\Table(name="courses")
- */
+#[Entity]
+#[Table('courses')]
 class Course
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    #[Id]
+    #[Column, GeneratedValue]
+    private int $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $name;
+    #[Column]
+    private string $name;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $image;
+    #[Column]
+    private string $image;
 
-    /**
-     * @ORM\Column(type="text")
-     */
-    private $description;
+    #[Column(type: Types::TEXT)]
+    private string $description;
+
+    #[Column(name: 'created_at')]
+    private DateTime $createdAt;
 
     public function getId()
     {
@@ -65,5 +65,15 @@ class Course
     public function getDescription()
     {
         return $this->description;
+    }
+
+    public function setCreatedAt(DateTime $createdAt)
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
     }
 }
