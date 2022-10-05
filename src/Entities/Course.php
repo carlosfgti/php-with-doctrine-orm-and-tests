@@ -11,8 +11,9 @@ use Doctrine\ORM\Mapping\{
     Id,
     Table
 };
+use Src\Repositories\CourseRepository;
 
-#[Entity]
+#[Entity(repositoryClass: CourseRepository::class)]
 #[Table('courses')]
 class Course
 {
