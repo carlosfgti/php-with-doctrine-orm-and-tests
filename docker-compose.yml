@@ -9,7 +9,6 @@ services:
         USER_ID: '${WWWUSER:-1000}'
         GROUP_ID: '${WWWGROUP:-1000}'
         USER: '${USER:-whoami}'
-    container_name: programwithgio-app
     restart: always
     working_dir: /var/www/
     volumes:
