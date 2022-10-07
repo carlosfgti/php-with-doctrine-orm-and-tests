@@ -12,7 +12,7 @@ use Src\Entities\Course;
 $dotenv = Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
 
-$paths = [__DIR__."/../Entities"];
+$paths = [__DIR__."/../src/Entities"];
 $isDevMode = true;
 $proxyDir = null;
 $cache = null;
