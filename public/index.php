@@ -13,7 +13,7 @@ $dotenv = Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
 
 $paths = [__DIR__."/../src/Entities"];
-$isDevMode = true;
+$isDevMode = (bool) $_ENV['IS_DEV'];
 $proxyDir = null;
 $cache = null;
 $useSimpleAnnotationReader = false;
