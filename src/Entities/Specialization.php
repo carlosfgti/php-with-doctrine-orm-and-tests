@@ -3,12 +3,15 @@
 namespace Src\Entities;
 
 use DateTimeImmutable;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping\{
     Column,
     Entity,
     GeneratedValue,
     Id,
+    ManyToMany,
     Table
 };
 use Src\Repositories\SpecializationRepository;
@@ -40,4 +43,20 @@ class Specialization
 
     #[Column(name: 'created_at')]
     private DateTimeImmutable $createdAt;
+
+    #[ManyToMany(Course::class, mappedBy: "specializations")]
+    private Collection $courses;
+
+    public function __construct()
+    {
+        $this->courses = new ArrayCollection();
+    }
+
+    /**
+     * @return Collection<Course>
+     */
+    public function courses(): Collection
+    {
+        return $this->courses;
+    }
 }

@@ -3,12 +3,15 @@
 namespace Src\Entities;
 
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping\{
     Column,
     Entity,
     GeneratedValue,
     Id,
+    ManyToMany,
     Table
 };
 use Src\Repositories\CourseRepository;
@@ -32,6 +35,14 @@ class Course
 
     #[Column(name: 'created_at')]
     private DateTime $createdAt;
+
+    #[ManyToMany(targetEntity: Specialization::class, inversedBy: "courses")]
+    private Collection $specializations;
+
+    public function __construct()
+    {
+        $this->specializations = new ArrayCollection();
+    }
 
     public function getId()
     {
@@ -76,5 +87,13 @@ class Course
     public function getCreatedAt()
     {
         return $this->createdAt;
+    }
+
+    /**
+     * @return Collection<Specialization>
+     */
+    public function specialization(): Collection
+    {
+        return $this->specialization;
     }
 }
