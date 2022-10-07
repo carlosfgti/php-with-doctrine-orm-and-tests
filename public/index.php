@@ -14,10 +14,7 @@ $dotenv->load();
 
 $paths = [__DIR__."/../src/Entities"];
 $isDevMode = (bool) $_ENV['IS_DEV'];
-$proxyDir = null;
-$cache = null;
-$useSimpleAnnotationReader = false;
-$config = ORMSetup::createAnnotationMetadataConfiguration($paths, $isDevMode, $proxyDir, $cache);
+$config = ORMSetup::createAnnotationMetadataConfiguration($paths, $isDevMode);
 
 $connection = [
     'dbname' => $_ENV['DB_NAME'],
