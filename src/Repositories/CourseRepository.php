@@ -4,9 +4,9 @@ namespace Src\Repositories;
 
 use Doctrine\Persistence\ManagerRegistry;
 use Src\Entities\Course;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityRepository;
 
-class CourseRepository extends ServiceEntityRepository
+class CourseRepository extends EntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
