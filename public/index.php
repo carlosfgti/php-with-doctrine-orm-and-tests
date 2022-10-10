@@ -30,6 +30,8 @@ $connection = [
 // ];
 
 $entityManager = EntityManager::create($connection, $config);
+$conn = $entityManager->getConnection();
+$conn->getDatabasePlatform()->registerDoctrineTypeMapping('enum', 'string');
 
 // $course = new Course;
 // $course->setName('test');
