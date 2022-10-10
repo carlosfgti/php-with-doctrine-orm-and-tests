@@ -8,8 +8,19 @@ use Doctrine\ORM\EntityRepository;
 
 class CourseRepository extends EntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    // public function __construct(ManagerRegistry $registry)
+    // {
+    //     parent::__construct($registry, Course::class);
+    // }
+
+    /**
+     * @return Course[]
+     */
+    public function getCourses(): array
     {
-        parent::__construct($registry, Course::class);
+        return $this->createQueryBuilder('course')
+                        ->select('course')
+                        ->getQuery()
+                        ->getResult();
     }
 }
