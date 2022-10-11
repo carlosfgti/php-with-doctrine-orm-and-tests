@@ -8,8 +8,21 @@ use Doctrine\ORM\EntityRepository;
 
 class SpecializationRepository extends EntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    // public function __construct(ManagerRegistry $registry)
+    // {
+    //     parent::__construct($registry, Specialization::class);
+    // }
+
+    /**
+     * @return Specialization[]
+     */
+    public function getSpecializationsWithCourses(): array
     {
-        parent::__construct($registry, Specialization::class);
+        return $this->createQueryBuilder('specialization')
+                        ->addSelect('specialization')
+                        ->addSelect('course')
+                        ->leftJoin('specialization.courses', 'course')
+                        ->getQuery()
+                        ->getResult();
     }
 }

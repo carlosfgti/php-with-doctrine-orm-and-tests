@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping\{
     Entity,
     GeneratedValue,
     Id,
+    JoinTable,
     ManyToMany,
     Table
 };
@@ -37,6 +38,7 @@ class Course
     private DateTime $createdAt;
 
     #[ManyToMany(targetEntity: Specialization::class, inversedBy: "courses")]
+    #[JoinTable(name: 'specialization_course')]
     private Collection $specializations;
 
     public function __construct()

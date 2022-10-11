@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping\{
     Entity,
     GeneratedValue,
     Id,
+    JoinTable,
     ManyToMany,
     Table
 };
@@ -32,7 +33,7 @@ class Specialization
     #[Column]
     private string $image;
 
-    #[Column(name: 'image_social')]
+    #[Column(name: 'img_social')]
     private string $socialImage;
 
     #[Column(type: Types::TEXT)]
@@ -45,6 +46,7 @@ class Specialization
     private DateTimeImmutable $createdAt;
 
     #[ManyToMany(Course::class, mappedBy: "specializations")]
+    #[JoinTable(name: 'specialization_course')]
     private Collection $courses;
 
     public function __construct()
@@ -58,5 +60,10 @@ class Specialization
     public function courses(): Collection
     {
         return $this->courses;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
     }
 }
