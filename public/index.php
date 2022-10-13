@@ -18,8 +18,13 @@ $app = AppFactory::create();
  * Routes
  */
 $app->get('/', function (Request $request, Response $response) {
-    $response->getBody()->write('<a href="/hello/world">Try /hello/world</a>');
-    return $response;
+    $data = ['success' => true];
+    $payload = json_encode($data);
+
+    $response->getBody()->write($payload);
+    return $response
+            ->withHeader('Content-Type', 'application/json')
+            ->withStatus(200);
 });
 
 $app->run();
