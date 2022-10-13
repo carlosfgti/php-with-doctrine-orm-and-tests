@@ -3,6 +3,7 @@
 namespace Src\Entities;
 
 use DateTime;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -31,11 +32,14 @@ class Course
     #[Column]
     private string $image;
 
+    #[Column]
+    private string $color;
+
     #[Column(type: Types::TEXT)]
     private string $description;
 
     #[Column(name: 'created_at')]
-    private DateTime $createdAt;
+    private DateTimeImmutable $createdAt;
 
     #[ManyToMany(targetEntity: Specialization::class, inversedBy: "courses")]
     #[JoinTable(name: 'specialization_course')]
@@ -46,7 +50,7 @@ class Course
         $this->specializations = new ArrayCollection();
     }
 
-    public function getId()
+    public function getId(): int|string
     {
         return $this->id;
     }
@@ -69,6 +73,11 @@ class Course
     public function getImage()
     {
         return $this->image;
+    }
+
+    public function getColor()
+    {
+        return $this->color;
     }
 
     public function setDescription(string $description)

@@ -42,6 +42,9 @@ class Specialization
     #[Column]
     private string $video;
 
+    #[Column]
+    private DateTimeImmutable $date;
+
     #[Column(name: 'created_at')]
     private DateTimeImmutable $createdAt;
 
@@ -62,8 +65,43 @@ class Specialization
         return $this->courses;
     }
 
+    public function getId(): int|string
+    {
+        return $this->id;
+    }
+
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function getUrl(): string
+    {
+        return $this->url;
+    }
+
+    public function getImage(): string
+    {
+        return $this->image ?? '';
+    }
+
+    public function getSocialImage(): string
+    {
+        return $this->socialImage ?? '';
+    }
+
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    public function getDate(): DateTimeImmutable
+    {
+        return $this->date;
+    }
+
+    public function getVideo(): string
+    {
+        return $this->video;
     }
 }

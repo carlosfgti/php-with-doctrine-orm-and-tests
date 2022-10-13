@@ -43,11 +43,21 @@ $app->get('/specializations', function (Request $request, Response $response) us
         /** @var Course[] $courses */
         foreach ($specialization->courses() as $course) {
             $courses[] = [
+                'id' => $course->getId(),
                 'name' => $course->getName(),
+                'color' => $course->getColor(),
+                'image' => $course->getImage(),
+                'description' => $course->getDescription(),
             ];
         }
         $data[$key] = [
+            'id' => $specialization->getId(),
             'name' => $specialization->getName(),
+            'url' => $specialization->getUrl(),
+            'image' => $specialization->getImage(),
+            'description' => $specialization->getDescription(),
+            'video' => $specialization->getVideo(),
+            'date' => $specialization->getDate()->format('d/m/Y'),
             'courses' => $courses,
         ];
     }
