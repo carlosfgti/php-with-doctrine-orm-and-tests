@@ -7,7 +7,9 @@ require_once __DIR__ . '/../bootstrap/bootstrap.php';
 use Dotenv\Dotenv;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Server\RequestHandlerInterface;
 use Slim\Factory\AppFactory;
+use Slim\Routing\RouteContext;
 use Src\Entities\Course;
 use Src\Entities\Specialization;
 use Src\Helper\EntityManagerCreator;
@@ -20,13 +22,28 @@ $entityManager = EntityManagerCreator::createEntityManager();
 $app = AppFactory::create();
 
 /**
+ * CORS
+ */
+$app->add(function (Request $request, RequestHandlerInterface $handler): Response {
+    $methods = ['GET'];
+    $requestHeaders = 'X-Requested-With, Content-Type, Accept, Origin';
+
+    $response = $handler->handle($request);
+
+    $response = $response->withHeader('Access-Control-Allow-Origin', '*');
+    $response = $response->withHeader('Access-Control-Allow-Methods', implode(',', $methods));
+    $response = $response->withHeader('Access-Control-Allow-Headers', $requestHeaders);
+
+    // Optional: Allow Ajax CORS requests with Authorization header
+    // $response = $response->withHeader('Access-Control-Allow-Credentials', 'true');
+
+    return $response;
+});
+
+/**
  * Routes
  */
 $app->get('/', function (Request $request, Response $response) {
-    $response = $response->withHeader('Access-Control-Allow-Origin', '*');
-    $response = $response->withHeader('Access-Control-Allow-Methods', 'GET');
-    $response = $response->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin');
-    
     $data = ['success' => true];
     $payload = json_encode($data);
 
@@ -37,10 +54,6 @@ $app->get('/', function (Request $request, Response $response) {
 });
 
 $app->get('/specializations', function (Request $request, Response $response) use ($entityManager) {
-    $response = $response->withHeader('Access-Control-Allow-Origin', '*');
-    $response = $response->withHeader('Access-Control-Allow-Methods', 'GET');
-    $response = $response->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin');
-
     $repository = $entityManager->getRepository(Specialization::class);
     $specializations = $repository->getSpecializationsWithCourses();
 
