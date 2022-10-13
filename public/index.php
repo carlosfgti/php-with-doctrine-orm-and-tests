@@ -23,6 +23,10 @@ $app = AppFactory::create();
  * Routes
  */
 $app->get('/', function (Request $request, Response $response) {
+    $response = $response->withHeader('Access-Control-Allow-Origin', '*');
+    $response = $response->withHeader('Access-Control-Allow-Methods', 'GET');
+    $response = $response->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin');
+    
     $data = ['success' => true];
     $payload = json_encode($data);
 
@@ -33,6 +37,10 @@ $app->get('/', function (Request $request, Response $response) {
 });
 
 $app->get('/specializations', function (Request $request, Response $response) use ($entityManager) {
+    $response = $response->withHeader('Access-Control-Allow-Origin', '*');
+    $response = $response->withHeader('Access-Control-Allow-Methods', 'GET');
+    $response = $response->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin');
+
     $repository = $entityManager->getRepository(Specialization::class);
     $specializations = $repository->getSpecializationsWithCourses();
 
