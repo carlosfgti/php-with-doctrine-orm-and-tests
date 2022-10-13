@@ -27,6 +27,7 @@
         "symfony/yaml": "^5.4",
         "symfony/cache": "^5.4",
         "vlucas/phpdotenv": "^5.4",
-        "doctrine/migrations": "^3.5"
+        "doctrine/migrations": "^3.5",
+        "slim/slim": "^4.10"
     }
 }
